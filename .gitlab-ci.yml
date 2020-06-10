@@ -15,7 +15,7 @@ test:
 build:
   stage: build
   script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u "regoo707" -p "P@ssw0rdroot77" docker.io
     - docker build --pull -t "regoo707/apps:$IMAGE_TAG" .
     - docker push "regoo707/apps:$IMAGE_TAG"
     - docker rmi "regoo707/apps:$IMAGE_TAG"
