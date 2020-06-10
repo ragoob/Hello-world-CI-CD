@@ -1,0 +1,22 @@
+image: regoo707/apps:$IMAGE_TAG
+services:
+  - docker:dind
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build --pull -t "regoo707/apps:$IMAGE_TAG" hello-word-nest-app/.
+    - docker push "regoo707/apps:$IMAGE_TAG"
+    - docker rmi "regoo707/apps:$IMAGE_TAG"
+
+deploy:
+  stage: deploy
+  script:
+    - ~/rancher login https://$RANCHER_URL/v3 --token $RANCHER_ACCESS_TOKEN --skip-verify
+    - ~/rancher catalog refresh $RANCHER_CATELOG_NAME --wait
+    - ~/rancher app upgrade $RANCHER_APP_NAME 0.1.5
