@@ -15,8 +15,8 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello Git/Lab CI/CD"', () => {
-      expect(appController.getHello()).toBe('Hello Git/Lab CI/CD');
+    it('should return "Hello Git/Lab CI/CD against Rancher"', () => {
+      expect(appController.getHello()).toBe('Hello Git/Lab CI/CD against Rancher');
     });
   });
 });
