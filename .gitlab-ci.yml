@@ -3,13 +3,14 @@ services:
   - docker:dind
 
 stages:
-  - build
   - test
+  - build
   - deploy
 
 test:
   stage: test
   script:
+    - npm run build
     - npm run test
 
 build:
